@@ -28,7 +28,7 @@ function NavBar() {
             <div><Link to="/Home">CONTACT</Link></div>
             <div className='flex gap-x-6 justify-center items-center'>
               <div><Link to="/Home"><i className="bi bi-search"></i></Link></div>
-              <div><Link to="/Home"><i className="bi bi-cart"></i></Link></div>
+              <div><Link to="/Cart"><i className="bi bi-cart"></i></Link></div>
             </div>
           </div>
         </div>

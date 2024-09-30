@@ -1,6 +1,8 @@
-import Login from '../components/Login'
+import { useNavigate } from 'react-router-dom'
+import Button from '../components/Button'
 
 function LoginPage() {
+  const navigate = useNavigate()
   return (
     <>
       <form>
@@ -24,8 +26,7 @@ function LoginPage() {
             <a href="#!">Forgot password?</a>
           </div>
         </div>
-
-        <Login/>
+        <Button className="btn btn-primary btn-block mb-4" type="button" onClick={() => navigate('/Home')}>Sign in</Button>
 
         <div className="text-center">
           <p>Not a member? <a href="#!">Register</a></p>
