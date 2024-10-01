@@ -5,49 +5,43 @@ function LoginPage() {
   const navigate = useNavigate()
   return (
     <>
-      <form>
-        <div className="form-outline mb-4">
-          <input type="email" id="form2Example1" className="form-control" />
-          <label className="form-label" htmlFor="form2Example1">Email address</label>
+      <form className='flex flex-col items-center mt-60'>
+        <div className="border rounded-md px-2 py-1 w-80">
+          <label className='' >Email id :</label>
+          <input type="email" placeholder='Enter your email address' className="ml-3 outline-none" />
         </div>
-        <div className="form-outline mb-4">
-          <input type="password" id="form2Example2" className="form-control" />
-          <label className="form-label" htmlFor="form2Example2">Password</label>
+        <div className="mt-4 border rounded-md px-2 py-1 w-80">
+          <label className="">Password :</label>
+          <input type="password" placeholder='Enter your Password' className="ml-3 outline-none" />
         </div>
-        <div className="row mb-4">
-          <div className="col d-flex justify-content-center">
-            <div className="form-check">
-              <input className="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-              <label className="form-check-label" htmlFor="form2Example31"> Remember me </label>
-            </div>
-          </div>
-
-          <div className="col">
+        <div className="flex gap-20 mt-5">
+          <div className="">
             <a href="#!">Forgot password?</a>
           </div>
+          <div className="">
+            <input className="" type="checkbox" />
+            <label className=""> Remember me </label>
+          </div>
         </div>
-        <Button className="btn btn-primary btn-block mb-4" type="button" onClick={() => navigate('/Home')}>Sign in</Button>
+        <Button className="btn btn-primary btn-block mt-3" type="button" onClick={() => navigate('/Home')}>Sign in</Button>
 
-        <div className="text-center">
-          <p>Not a member? <a href="#!">Register</a></p>
-          <p>or sign up with:</p>
-          <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1">
+        <div className="w-86 mt-3 flex gap-3">
+          <p>Not a member? <a href="#!">Register</a>or sign up with :</p>
+          <button >
             <i className="fab fa-facebook-f"></i>
           </button>
-
-          <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1">
+          <button type="button" data-mdb-button-init data-mdb-ripple-init className="">
             <i className="fab fa-google"></i>
           </button>
-
-          <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1">
+          <button className="">
             <i className="fab fa-twitter"></i>
           </button>
-
-          <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1">
+          <button className="">
             <i className="fab fa-github"></i>
           </button>
         </div>
       </form>
+
     </>
 
   )

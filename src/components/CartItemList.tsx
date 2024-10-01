@@ -3,7 +3,7 @@ import { contextProvider } from '../context/AppContext';
 import Button from './Button';
 
 function CartItemList() {
-  const { cartItems, decreaseCountInCart, addItemToCart } = contextProvider();
+  const { cartItems, decreaseCountInCart, addItemToCart, removeCartItem } = contextProvider();
   let total = 0;
   cartItems.map((element) => (total = total + element.count * element.price));
   return (
@@ -25,9 +25,9 @@ function CartItemList() {
                 {cartItems.map((element) => (
                   <tr key={element.id} className="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700">
                     <td className="px-6 py-4">
-                      <button>
-                        <i className="bi bi-x-circle"></i>
-                      </button>
+                      <Button className='border rounded-full p-1' onClick={() => {removeCartItem(element)}}>
+                        ✖                
+                      </Button>
                     </td>
                     <td className="px-6 py-4">
                       <img src={element.img} alt={element.name} className="h-16 w-16 object-cover" />

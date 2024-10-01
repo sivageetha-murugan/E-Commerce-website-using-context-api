@@ -10,19 +10,20 @@ export interface Item {
 }
 
 export interface CartItem extends Item {
-  count : number 
+  count: number
 }
 
 export interface Context {
   product: Item[],
   cartItems: CartItem[],
   addItemToCart: (product: Item) => void,
-  decreaseCountInCart: (id:string) => void
+  decreaseCountInCart: (id: string) => void,
+  removeCartItem: (product: Item) => void
 }
 
 const AppContext = createContext<Context | undefined>(undefined);
 
-export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) => {
+export const AppContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [product] = useState<Item[]>([
     {
       id: 'fjw',
@@ -83,39 +84,51 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
   const [cartItems, setCartItems] = useState<CartItem[]>([])
 
   const addItemToCart = (product: Item) => {
-      const isCartItemPresent = cartItems.find(element => element.id === product.id)
-      console.log(isCartItemPresent);
-      
-      if(isCartItemPresent) {
-        setCartItems(cartItems.map(element => 
-          element.id=== product.id ? {...element, count: element.count + 1 } : element
-        ))
-      } else {
-        setCartItems([...cartItems, {...product, count: 1}])
-      }
+    const isCartItemPresent = cartItems.find(element => element.id === product.id)
+    console.log(isCartItemPresent);
+
+    if (isCartItemPresent) {
+      setCartItems(cartItems.map(element =>
+        element.id === product.id ? { ...element, count: element.count + 1 } : element
+      ))
+    } else {
+      setCartItems([...cartItems, { ...product, count: 1 }])
+    }
+  }
+
+  const removeCartItem = (product: Item) => {
+    setCartItems(cartItems.filter(element => element.id !== product.id))
   }
 
   const decreaseCountInCart = (id: string) => {
-    setCartItems(cartItems.map(element => 
-      element.id === id && element.count > 0 ? {...element, count: element.count - 1} : element
+    setCartItems(cartItems.map(element =>
+      element.id === id && element.count > 0 ? { ...element, count: element.count - 1 } : element
     ))
+    cartItems.map(element => {
+      if (element.count === 1) {
+        removeCartItem(element)
+      }
+    }
+    )
   }
 
-  const contextValue: Context =  {
+
+  const contextValue: Context = {
     product,
     cartItems,
     addItemToCart,
-    decreaseCountInCart
+    decreaseCountInCart,
+    removeCartItem
   }
 
   return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
-  
+
 }
 
 export const contextProvider = (): Context => {
   const contextObj = useContext(AppContext)
-  if(!contextObj) {
-    throw new Error("gh");
+  if (!contextObj) {
+    throw new Error("Error accessing context");
   }
   return contextObj
 }
