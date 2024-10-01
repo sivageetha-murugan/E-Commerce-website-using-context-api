@@ -1,6 +1,5 @@
 import { contextProvider } from "../context/AppContext";
 import Button from "../components/Button";
-import NavBar from "../components/NavBar";
 import CartItemList from "../components/CartItemList";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +11,6 @@ function CartPage() {
 
   return (
     <>
-      <NavBar />
       <div className="flex flex-col mb-4">
         <div className="h-32 p-4 text-2xl font-medium">
           <div className="mt-4 ms-2">CART</div>
@@ -39,10 +37,10 @@ function CartPage() {
         </div>
       </div>
       {
-        cartItems.length > 0 ? <CartItemList/> : <div className="p-5 flex flex-col gap-3"><div className="text-xl w-full bg-gray-200 h-16 p-3 px-3">Your cart is empty</div>
-        <div><Button className="p-3 text-sm border tracking-widest" onClick={() => navigate('/Home')}>RETURN TO SHOP </Button></div></div>
+        cartItems.length > 0 ? <CartItemList /> : <div className="p-5 flex flex-col gap-3"><div className="text-xl w-full bg-gray-200 h-16 p-3 px-3">Your cart is empty</div>
+          <div><Button className="p-3 text-sm border tracking-widest" onClick={() => navigate('/Home')}>RETURN TO SHOP </Button></div></div>
       }
-      
+
     </>
   );
 }

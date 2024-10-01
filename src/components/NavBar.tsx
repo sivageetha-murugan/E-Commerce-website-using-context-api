@@ -1,21 +1,18 @@
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { contextProvider } from '../context/AppContext'
 
 
 function NavBar() {
-const {cartItems} = contextProvider()
+  const { cartItems } = contextProvider()
   return (
     <>
       <nav className='h-20 w-full'>
         <div className='flex'>
           <div className='flex w-1/3 h-20 gap-x-6 justify-center items-center'>
-            <div className='text-md font-light'>
-              <Link to="/Home">RINGS</Link>
-            </div>
-
-            <div className='text-md font-light'><Link to="/Home">BRACELETS</Link></div>
-            <div className='text-md font-light'><Link to="/Home">EARRINGS</Link></div>
-            <div className='text-md font-light'><Link to="/Home">NECKLACES</Link></div>
+            <div className='text-md font-light'><Link to="/category/Rings">RINGS</Link></div>
+            <div className='text-md font-light'><Link to="/category/Bracelets">BRACELETS</Link></div>
+            <div className='text-md font-light'><Link to="/category/Earrings">EARRINGS</Link></div>
+            <div className='text-md font-light'><Link to="/category/Necklaces">NECKLACES</Link></div>
           </div>
           <div className='flex w-1/3 h-20 items-center justify-center'>
             <Link to="/Home">
@@ -42,6 +39,7 @@ const {cartItems} = contextProvider()
           </div>
         </div>
       </nav>
+      <Outlet />
     </>
   )
 }
