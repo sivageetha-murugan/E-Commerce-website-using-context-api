@@ -105,14 +105,13 @@ export const AppContextProvider: React.FC<{ children: ReactNode }> = ({ children
       element.id === id && element.count > 0 ? { ...element, count: element.count - 1 } : element
     ))
     cartItems.map(element => {
-      if (element.count === 1) {
+      if (element.count === 0) {
         removeCartItem(element)
       }
     }
     )
   }
-
-
+  
   const contextValue: Context = {
     product,
     cartItems,

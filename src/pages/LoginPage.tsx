@@ -27,7 +27,7 @@ function LoginPage() {
 
         <div className="w-86 mt-3 flex gap-3">
           <p>Not a member? <a href="#!">Register</a>or sign up with :</p>
-          <button >
+          <button>
             <i className="fab fa-facebook-f"></i>
           </button>
           <button type="button" data-mdb-button-init data-mdb-ripple-init className="">
