@@ -5,7 +5,7 @@ function HomePage() {
   return (
     <>
       <NavBar />
-      <div className='p-8'>
+      <div className='p-8 mt-5'>
         <Product />
       </div>
     </>

@@ -5,11 +5,12 @@ export interface Item {
   id: string,
   name: string,
   price: number,
-  img: string
+  img: string,
+  count?: number
 }
 
 export interface CartItem extends Item {
-  count : number
+  count : number 
 }
 
 export interface Context {
@@ -30,33 +31,51 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
       img: ring01
     },
     {
-      id: 'fjw',
-      name: 'Ring 1',
-      price: 1299,
+      id: 'efhus',
+      name: 'Ring 2',
+      price: 999,
       img: ring01
     },
     {
-      id: 'fjw',
-      name: 'Ring 1',
-      price: 1299,
+      id: 'jvh',
+      name: 'Ring 3',
+      price: 7999,
       img: ring01
     },
     {
-      id: 'fjw',
-      name: 'Ring 1',
-      price: 1299,
+      id: 'oe',
+      name: 'Ring 4',
+      price: 1111,
       img: ring01
     },
     {
-      id: 'fjw',
-      name: 'Ring 1',
-      price: 1299,
+      id: 'inc',
+      name: 'Ring 5',
+      price: 8723,
       img: ring01
     },
     {
-      id: 'fjw',
-      name: 'Ring 1',
-      price: 1299,
+      id: 'ldd',
+      name: 'Ring 6',
+      price: 10999,
+      img: ring01
+    },
+    {
+      id: 'ijhu',
+      name: 'Ring 7',
+      price: 6999,
+      img: ring01
+    },
+    {
+      id: 'tdl',
+      name: 'Ring 8',
+      price: 9999,
+      img: ring01
+    },
+    {
+      id: 'ldd',
+      name: 'Ring 9',
+      price: 5614,
       img: ring01
     }
   ])
@@ -64,10 +83,12 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
   const [cartItems, setCartItems] = useState<CartItem[]>([])
 
   const addItemToCart = (product: Item) => {
-      const isCartItemPresent = cartItems.find(element => {element.id === product.id})
+      const isCartItemPresent = cartItems.find(element => element.id === product.id)
+      console.log(isCartItemPresent);
+      
       if(isCartItemPresent) {
         setCartItems(cartItems.map(element => 
-          element.id === product.id ? {...element, count: element.count + 1} : element
+          element.id=== product.id ? {...element, count: element.count + 1 } : element
         ))
       } else {
         setCartItems([...cartItems, {...product, count: 1}])
@@ -76,7 +97,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
 
   const decreaseCountInCart = (id: string) => {
     setCartItems(cartItems.map(element => 
-      element.id === id ? {...element, count: element.count - 1} : element
+      element.id === id && element.count > 0 ? {...element, count: element.count - 1} : element
     ))
   }
 

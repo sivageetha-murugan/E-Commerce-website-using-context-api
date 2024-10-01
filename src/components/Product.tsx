@@ -7,7 +7,7 @@ function Product() {
  
   return (
     <>
-      <div className='flex flex-wrap gap-4 justify-center items-center'>
+      <div className='flex flex-wrap gap-5 justify-center items-center'>
         {product.map((item, index) => (
           <div key={index} className='h-80 w-60 border border-slate-300 flex flex-col gap-y-2'>
             <div>
