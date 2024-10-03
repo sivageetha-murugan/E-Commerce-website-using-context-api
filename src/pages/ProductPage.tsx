@@ -11,8 +11,8 @@ function ProductPage(props: { page: string; category: string }) {
   props.page === "Home" ? (products.length = 4) : products;
   return (
     <div className="flex flex-wrap gap-5 justify-center items-center pt-5">
-      {products.map((item, index) => (
-        <Product item={item} index={index} />
+      {products.map((item) => (
+        <Product item={item} index={item.id} />
       ))}
     </div>
   );

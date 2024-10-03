@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Category } from "../type/Type";
 import Product from "./Product";
 import { contextProvider } from "../context/AppContext";
+import { useMemo } from "react";
 
 function HomePageCategory(props: {
   index: number;
@@ -11,11 +12,14 @@ function HomePageCategory(props: {
 }) {
   const { product } = contextProvider();
 
-  const products = product.filter(
-    (categoryItem) => categoryItem.category === props.element.name
-  );
+  const products = useMemo(() => {
+    const list = product.filter(
+      (categoryItem) => categoryItem.category === props.element.name
+    );
+    return {list};
+  }, [product, props.element.name])
 
-  props.page === "Home" ? (products.length = 4) : products;
+  props.page === "Home" ? (products.list.length = 4) : products;
 
   const navigate = useNavigate();
   return (
@@ -30,8 +34,8 @@ function HomePageCategory(props: {
         </Button>
       </div>
       <div className="flex flex-wrap gap-5 justify-center items-center pt-5">
-        {products.map((item, index) => (
-          <Product item={item} index={index} />
+        {products.list.map((item) => (
+          <Product item={item} index={item.id} />
         ))}
       </div>
     </div>

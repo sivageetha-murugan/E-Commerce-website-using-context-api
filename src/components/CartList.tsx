@@ -1,12 +1,20 @@
 import Button from "./Button";
 import { contextProvider } from "../context/AppContext";
 import { CartItem } from "../type/Type";
+import { useMemo } from "react";
 
-function CartItemsInCart(props: {element: CartItem}) {
-  const {removeCartItem, decreaseCountInCart, addItemToCart} = contextProvider()
+function CartList(props: { element: CartItem,  key:string}) {
+  const { removeCartItem, decreaseCountInCart, addItemToCart } =
+    contextProvider();
+
+  const calculatePrice = useMemo(() => {
+    const totalPrice = props.element.count * props.element.price;
+    return { totalPrice };
+  }, [props.element.count, props.element.price]);
+
   return (
     <tr
-      key={props.element.id}
+      key={props.key}
       className="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700"
     >
       <td className="px-6 py-4">
@@ -49,9 +57,9 @@ function CartItemsInCart(props: {element: CartItem}) {
           </Button>
         </div>
       </td>
-      <td className="px-6 py-4">{props.element.count * props.element.price}</td>
+      <td className="px-6 py-4">{calculatePrice.totalPrice}</td>
     </tr>
   );
 }
 
-export default CartItemsInCart;
+export default CartList;

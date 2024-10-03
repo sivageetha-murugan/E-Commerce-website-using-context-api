@@ -1,11 +1,9 @@
 import { contextProvider } from "../context/AppContext";
-import Button from "./Button";
-import CartItemsInCart from "./CartItemsInCart.tsx";
+import CartList from "./CartList.tsx";
 import Total from "./Total.tsx";
 
 function CartItemList() {
-  const { cartItems, decreaseCountInCart, addItemToCart, removeCartItem } =
-    contextProvider();
+  const { cartItems } = contextProvider();
   return (
     <div className="flex p-3 gap-3">
       <div className="w-3/4">
@@ -30,8 +28,8 @@ function CartItemList() {
               </tr>
             </thead>
             <tbody>
-              {cartItems.map((element) => (
-                <CartItemsInCart element= {element}/>
+              {cartItems.map((element, index) => (
+                <CartList element={element} key={`${index} ${element.id}`} />
               ))}
             </tbody>
           </table>
