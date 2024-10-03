@@ -11,7 +11,13 @@ import ring09 from "../assets/ring-09.avif";
 
 export const productList: Item[] = [
   { id: "fjw", name: "Ring 1", price: 1299, img: ring01, category: "Rings" },
-  { id: "efhus", name: "Bracelet 1", price: 999, img: ring02, category: "Bracelets"},
+  {
+    id: "efhus",
+    name: "Bracelet 1",
+    price: 999,
+    img: ring02,
+    category: "Bracelets",
+  },
   { id: "jvh", name: "Ring 3", price: 7999, img: ring03, category: "Rings" },
   { id: "oe", name: "Ring 4", price: 1111, img: ring04, category: "Rings" },
   { id: "inc", name: "Ring 5", price: 8723, img: ring05, category: "Rings" },

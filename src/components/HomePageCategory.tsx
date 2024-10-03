@@ -16,8 +16,8 @@ function HomePageCategory(props: {
     const list = product.filter(
       (categoryItem) => categoryItem.category === props.element.name
     );
-    return {list};
-  }, [product, props.element.name])
+    return { list };
+  }, [product, props.element.name]);
 
   props.page === "Home" ? (products.list.length = 4) : products;
 

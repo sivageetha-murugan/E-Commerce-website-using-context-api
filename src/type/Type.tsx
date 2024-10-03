@@ -23,4 +23,5 @@ export interface Context {
   addItemToCart: (product: Item) => void,
   decreaseCountInCart: (id: string) => void,
   removeCartItem: (product: Item) => void
+  calculateTotal: {total: number}
 }

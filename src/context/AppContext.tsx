@@ -4,6 +4,7 @@ import {
   useContext,
   useState,
   useCallback,
+  useMemo,
 } from "react";
 import { Item, Category, CartItem, Context } from "../type/Type";
 import { categoryList, productList } from "../data/ProductData";
@@ -18,6 +19,14 @@ export const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const [product] = useState<Item[]>(productList);
   const [categories] = useState<Category[]>(categoryList);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const calculateTotal = useMemo(() => {
+    let total = 0
+    cartItems.map(element => {
+      total += (element.count * element.price);
+    })
+    return {total};
+  }, [cartItems])
+
 
   const addItemToCart = useCallback(
     (productDetail: Item) => {
@@ -68,6 +77,7 @@ export const AppContextProvider = ({ children }: AppContextProviderProps) => {
     addItemToCart,
     decreaseCountInCart,
     removeCartItem,
+    calculateTotal
   };
 
   return (

@@ -2,9 +2,10 @@ import { contextProvider } from "../context/AppContext";
 import { Item } from "../type/Type";
 import Button from "./Button";
 import { useState, useEffect } from "react";
+import CountButton from "./CountButton";
 
 function Product(props: { index: string; item: Item }) {
-  const { addItemToCart, cartItems, decreaseCountInCart } = contextProvider();
+  const { addItemToCart, cartItems } = contextProvider();
   const [cartItem, setCartItem] = useState(
     cartItems.find((element) => element.id === props.item.id)
   );
@@ -25,27 +26,15 @@ function Product(props: { index: string; item: Item }) {
           <p>$ {props.item.price}</p>
           {cartItem ? (
             <div className="flex items-center">
-              <Button
-                className="h-8 w-8 border"
-                onClick={() => decreaseCountInCart(props.item.id)}
-              >
-                -
-              </Button>
-              <div className="h-8 w-8 border text-center">
-                <div className="mt-1">{cartItem.count}</div>
-              </div>
-              <Button
-                className="h-8 w-8 border"
-                onClick={() => addItemToCart(props.item)}
-              >
-                +
-              </Button>
+              <CountButton
+                item={props.item}
+                count={cartItem.count}
+                variant="secondary"
+                classList="h-6 w-6 border text-center pt-1 text-xs"
+              />
             </div>
           ) : (
-            <Button
-              className="bg-stone-300 p-1 m-1 rounded-md mt-0 text-xs px-2"
-              onClick={() => addItemToCart(props.item)}
-            >
+            <Button variant="primary" onClick={() => addItemToCart(props.item)}>
               Add to cart
             </Button>
           )}

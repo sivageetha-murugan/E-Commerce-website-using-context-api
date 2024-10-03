@@ -2,10 +2,10 @@ import Button from "./Button";
 import { contextProvider } from "../context/AppContext";
 import { CartItem } from "../type/Type";
 import { useMemo } from "react";
+import CountButton from "./CountButton";
 
-function CartList(props: { element: CartItem,  key:string}) {
-  const { removeCartItem, decreaseCountInCart, addItemToCart } =
-    contextProvider();
+function CartList(props: { element: CartItem; key: string }) {
+  const { removeCartItem } = contextProvider();
 
   const calculatePrice = useMemo(() => {
     const totalPrice = props.element.count * props.element.price;
@@ -40,21 +40,12 @@ function CartList(props: { element: CartItem,  key:string}) {
       <td className="px-6 py-4">${props.element.price}</td>
       <td className="px-6 py-4">
         <div className="flex items-center">
-          <Button
-            className="h-8 w-8 border"
-            onClick={() => decreaseCountInCart(props.element.id)}
-          >
-            -
-          </Button>
-          <div className="h-8 w-8 border text-center">
-            <div className="mt-1">{props.element.count}</div>
-          </div>
-          <Button
-            className="h-8 w-8 border"
-            onClick={() => addItemToCart(props.element)}
-          >
-            +
-          </Button>
+          <CountButton
+            item={props.element}
+            count={props.element.count}
+            variant="teritary"
+            classList="h-8 w-8 border text-center p-1"
+          />
         </div>
       </td>
       <td className="px-6 py-4">{calculatePrice.totalPrice}</td>
