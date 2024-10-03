@@ -43,7 +43,7 @@ function CartList(props: { element: CartItem; key: string }) {
           <CountButton
             item={props.element}
             count={props.element.count}
-            variant="teritary"
+            variant="tertiary"
             classList="h-8 w-8 border text-center p-1"
           />
         </div>

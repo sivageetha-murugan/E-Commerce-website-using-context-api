@@ -1,9 +1,10 @@
 import { Link, Outlet } from "react-router-dom";
 import { contextProvider } from "../context/AppContext";
+import NavLink from "./NavLink";
 import { useMemo } from "react";
 
 function NavBar() {
-  const { cartItems } = contextProvider();
+  const { cartItems, categories } = contextProvider();
 
   const totalItems = useMemo(() => {
     const noOfItems = cartItems.length;
@@ -15,18 +16,14 @@ function NavBar() {
       <nav className="h-20 w-full">
         <div className="flex">
           <div className="flex w-1/3 h-20 gap-x-6 justify-center items-center">
-            <div className="text-md font-light">
-              <Link to="/category/Rings">RINGS</Link>
-            </div>
-            <div className="text-md font-light">
-              <Link to="/category/Bracelets">BRACELETS</Link>
-            </div>
-            <div className="text-md font-light">
-              <Link to="/category/Earrings">EARRINGS</Link>
-            </div>
-            <div className="text-md font-light">
-              <Link to="/category/Necklaces">NECKLACES</Link>
-            </div>
+            {categories.map((element) => (
+              <NavLink
+                classList={"text-md font-light"}
+                toLink={`/category/${element.name}`}
+              >
+                {element.name}
+              </NavLink>
+            ))}
           </div>
           <div className="flex w-1/3 h-20 items-center justify-center">
             <Link to="/Home">
@@ -37,15 +34,13 @@ function NavBar() {
             </Link>
           </div>
           <div className="flex w-1/3 h-20 gap-x-6 justify-center items-center">
-            <div className="text-md font-light">
-              <Link to="/Home">HOME</Link>
-            </div>
-            <div className="text-md font-light">
-              <Link to="/Home">ABOUT</Link>
-            </div>
-            <div className="text-md font-light">
-              <Link to="/Home">CONTACT</Link>
-            </div>
+            {[{ name: "Home" }, { name: "About" }, { name: "Contact" }].map(
+              (element) => (
+                <NavLink classList={"text-md font-light"} toLink={element.name}>
+                  {element.name}
+                </NavLink>
+              )
+            )}
             <div className="flex gap-x-6 justify-center items-center relative inline-block">
               <div>
                 <Link to="/Home">
