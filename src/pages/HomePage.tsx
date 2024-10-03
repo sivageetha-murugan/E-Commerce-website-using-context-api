@@ -1,7 +1,7 @@
 import { contextProvider } from "../context/AppContext";
 import HomePageCategory from "../components/HomePageCategory";
 
-function HomePage(props: {page: string}) {
+function HomePage(props: { page: string }) {
   const { categories } = contextProvider();
   return (
     <>

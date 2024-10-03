@@ -2,14 +2,14 @@ import "../scss/button.css";
 interface ButtonType {
   type?: "button" | "submit" | "reset";
   className?: string;
-  children: string;
+  children: React.ReactNode;
   onClick?: () => void;
   variant?: string;
 }
 
 function Button({
-  type = "button",
-  className = "",
+  type,
+  className,
   children,
   variant,
   ...rest

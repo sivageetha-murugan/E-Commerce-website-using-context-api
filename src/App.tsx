@@ -4,9 +4,11 @@ import HomePage from "./pages/HomePage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CartPage from "./pages/CartPage";
 import { AppContextProvider } from "./context/AppContext";
-import Product from "./components/Product";
 import NavBar from "./components/NavBar";
 import ProductPage from "./pages/ProductPage";
+import CartItemList from "./components/CartItemList";
+import CheckoutPage from "./pages/CheckoutPage";
+import OrderPage from "./pages/OrderPage";
 
 function App() {
   return (
@@ -17,7 +19,11 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route element={<NavBar />}>
               <Route path="/Home" element={<HomePage page="Home" />} />
-              <Route path="/Cart" element={<CartPage />} />
+              <Route element={<CartPage />}>
+                <Route path="/Cart" element={<CartItemList />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
+                <Route path="/orders" element={<OrderPage />} />
+              </Route>
               <Route path="/category">
                 <Route
                   path="Rings"
@@ -25,7 +31,9 @@ function App() {
                 />
                 <Route
                   path="Bracelets"
-                  element={<ProductPage page="Bracelets" category="Bracelets" />}
+                  element={
+                    <ProductPage page="Bracelets" category="Bracelets" />
+                  }
                 />
                 <Route
                   path="Earrings"
@@ -33,7 +41,9 @@ function App() {
                 />
                 <Route
                   path="Necklaces"
-                  element={<ProductPage page="Necklaces" category="Necklaces" />}
+                  element={
+                    <ProductPage page="Necklaces" category="Necklaces" />
+                  }
                 />
               </Route>
             </Route>

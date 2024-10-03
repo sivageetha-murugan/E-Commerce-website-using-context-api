@@ -27,7 +27,7 @@ function HomePageCategory(props: {
       <div className="p-4 flex  justify-between items-center me-4">
         <div className="text-4xl font-bold uppercase">{props.element.name}</div>
         <Button
-          className=""
+          className="underline underline-offset-8"
           onClick={() => navigate(`/category/${props.element.name}`)}
         >
           Viewmore
