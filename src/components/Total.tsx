@@ -1,7 +1,7 @@
-import { contextProvider } from '../context/AppContext';
+import { contextProvider } from "../context/AppContext";
 
 function Total() {
-  const { cartItems } = contextProvider()
+  const { cartItems } = contextProvider();
   let total = 0;
   cartItems.map((element) => (total = total + element.count * element.price));
   return (
@@ -18,13 +18,13 @@ function Total() {
             <td className="py-2">${total}</td>
           </tr>
           <tr>
-            <td className="py-2 font-semibold px-3" >Total</td>
+            <td className="py-2 font-semibold px-3">Total</td>
             <td className="py-2 font-semibold">${total}</td>
           </tr>
         </tbody>
       </table>
     </div>
-  )
+  );
 }
 
-export default Total
+export default Total;

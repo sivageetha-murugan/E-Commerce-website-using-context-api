@@ -1,26 +1,17 @@
-import Product from '../components/Product'
-import { contextProvider } from '../context/AppContext';
-import { useNavigate } from 'react-router-dom';
-import Button from '../components/Button';
+import { contextProvider } from "../context/AppContext";
+import HomePageCategory from "../components/HomePageCategory";
 
-function HomePage() {
-  const { categories } = contextProvider()
-  const navigate = useNavigate();
+function HomePage(props: {page: string}) {
+  const { categories } = contextProvider();
   return (
     <>
-      <div className='p-8'>
-        {categories.map(element =>
-          <div className='mt-8 '>
-            <div className='p-4 flex  justify-between items-center me-4'>
-              <div className='text-4xl font-bold uppercase'>{element.name}</div>
-              <Button className='' onClick={() => navigate(`/category/${element.name}`)}>Viewmore</Button>
-            </div>
-            <Product category={element.name} page="Home" />
-          </div>
-        )}
+      <div className="p-8">
+        {categories.map((element, index) => (
+          <HomePageCategory index={index} element={element} page={props.page} />
+        ))}
       </div>
     </>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

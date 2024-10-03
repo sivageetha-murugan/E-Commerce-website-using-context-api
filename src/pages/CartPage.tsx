@@ -6,32 +6,30 @@ import { useNavigate } from "react-router-dom";
 function CartPage() {
   const navigate = useNavigate();
   const { cartItems } = contextProvider();
-  let total = 0;
-  cartItems.map((element) => (total = total + element.count * element.price));
-
+  
   return (
     <>
       <div className="flex flex-col mb-4">
         <div className="h-32 p-4 text-2xl font-medium">
           <div className="mt-4 ms-2">CART</div>
         </div>
-        <div className="flex justify-center items-center h-14 gap-2">
+        <div className="flex justify-center items-center h-14 gap-2 text-xl tracking-widest font-normal text-amber-700">
           <div className="flex gap-2">
-            <div className="h-6 w-6 rounded-2xl border text-center">1</div>
+            <div className="px-2 rounded-2xl border text-center">1</div>
             <div>SHOPPING CART</div>
           </div>
           <div>
             {">"}
           </div>
           <div className="flex gap-2">
-            <div className="h-6 w-6 rounded-2xl border text-center">2</div>
+            <div className="px-2 rounded-2xl border text-center">2</div>
             <div>CHECKOUT DETAILS</div>
           </div>
           <div>
             {">"}
           </div>
           <div className="flex gap-2">
-            <div className="h-6 w-6 rounded-2xl border text-center">3</div>
+            <div className="px-2 rounded-2xl border text-center">3</div>
             <div>ORDER COMPLETE</div>
           </div>
         </div>
