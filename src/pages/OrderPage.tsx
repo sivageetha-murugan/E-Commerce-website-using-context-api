@@ -2,7 +2,7 @@ import React from "react";
 import { contextProvider } from "../context/AppContext";
 
 function OrderPage() {
-  const {calculateTotal, cartItems} = contextProvider();
+  const { calculateTotal, cartItems } = contextProvider();
   return (
     <div className="w-4/6 flex flex-col justify-between space-y-4 mx-auto">
       <div className="h-28 font-medium text-xl flex justify-center pt-4">
@@ -43,12 +43,8 @@ function OrderPage() {
             {cartItems.map((element) => (
               <tr key={element.id} className="border-b border-gray-200">
                 <td className="flex items-center p-3 h-16 w-3/4">
-                  <div>
-                    {element.name} x 
-                  </div>
-                  <div className="font-medium ms-1">
-                   {element.count}
-                  </div>
+                  <div>{element.name} x</div>
+                  <div className="font-medium ms-1">{element.count}</div>
                 </td>
                 <td className="text-right p-3 w-1/4">
                   <div>${element.price * element.count}</div>
@@ -62,7 +58,9 @@ function OrderPage() {
               </td>
             </tr>
             <tr className="border-t border-gray-200">
-              <td className="text-left text-md p-3 h-16 w-3/4 ">Payment method:</td>
+              <td className="text-left text-md p-3 h-16 w-3/4 ">
+                Payment method:
+              </td>
               <td className="text-right text-md p-3 h-16 w-3/4 ">
                 Cash on delivery
               </td>
@@ -89,11 +87,11 @@ function OrderPage() {
           <div className="flex gap-2">
             <i className="bi bi-telephone"></i>
             <div>9080980989</div>
-            </div>
+          </div>
           <div className="flex gap-2">
             <i className="bi bi-envelope"></i>
             <div>raja@gmail.com</div>
-            </div>
+          </div>
         </div>
       </div>
     </div>

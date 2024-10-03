@@ -9,50 +9,76 @@ import ProductPage from "./pages/ProductPage";
 import CartItemList from "./components/CartItemList";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderPage from "./pages/OrderPage";
+import { AuthProvider, PrivateRoute } from "./context/AuthProvider";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <AppContextProvider>
-          <Routes>
-            <Route path="/">
-              <Route path="/login" element={<LoginPage />} />
-              <Route index element={<Navigate to="/login" />}></Route>
-              <Route element={<NavBar />}>
-                <Route path="/Home" element={<HomePage page="Home" />} />
-                <Route element={<CartPage />}>
-                  <Route path="/Cart" element={<CartItemList />} />
-                  <Route path="/checkout" element={<CheckoutPage />} />
-                  <Route path="/orders" element={<OrderPage />} />
-                </Route>
-                <Route path="/category">
+          <AuthProvider>
+            <Routes>
+              <Route path="/">
+                <Route path="/login" element={<LoginPage />} />
+                <Route index element={<Navigate to="/login" />}></Route>
+                <Route element={<NavBar />}>
                   <Route
-                    path="Rings"
-                    element={<ProductPage page="Rings" category="Rings" />}
-                  />
-                  <Route
-                    path="Bracelets"
+                    path="/Home"
                     element={
-                      <ProductPage page="Bracelets" category="Bracelets" />
+                      <PrivateRoute>
+                        <HomePage page="Home" />
+                      </PrivateRoute>
                     }
                   />
                   <Route
-                    path="Earrings"
                     element={
-                      <ProductPage page="Earrings" category="Earrings" />
+                      <PrivateRoute>
+                        <CartPage />
+                      </PrivateRoute>
                     }
-                  />
-                  <Route
-                    path="Necklaces"
-                    element={
-                      <ProductPage page="Necklaces" category="Necklaces" />
-                    }
-                  />
+                  >
+                    <Route path="/Cart" element={<CartItemList />} />
+                    <Route path="/checkout" element={<CheckoutPage />} />
+                    <Route path="/orders" element={<OrderPage />} />
+                  </Route>
+                  <Route path="/category">
+                    <Route
+                      path="Rings"
+                      element={
+                        <PrivateRoute>
+                          <ProductPage page="Rings" category="Rings" />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="Bracelets"
+                      element={
+                        <PrivateRoute>
+                          <ProductPage page="Bracelets" category="Bracelets" />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="Earrings"
+                      element={
+                        <PrivateRoute>
+                          <ProductPage page="Earrings" category="Earrings" />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="Necklaces"
+                      element={
+                        <PrivateRoute>
+                          <ProductPage page="Necklaces" category="Necklaces" />
+                        </PrivateRoute>
+                      }
+                    />
+                  </Route>
                 </Route>
               </Route>
-            </Route>
-          </Routes>
+            </Routes>
+          </AuthProvider>
         </AppContextProvider>
       </BrowserRouter>
     </>
