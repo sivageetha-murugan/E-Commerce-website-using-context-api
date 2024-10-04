@@ -4,7 +4,7 @@ function Total() {
   const { calculateTotal } = contextProvider();
 
   return (
-    <div className="w-1/4 p-4 bg-rose-100 dark:bg-rose-100 h-56">
+    <div className="w-1/4 p-4 bg-orange-50 h-56">
       <table className="w-full">
         <thead>
           <tr>

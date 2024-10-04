@@ -1,6 +1,7 @@
 import { contextProvider } from "../context/AppContext";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
+import CheckOutCartItems from "../components/CheckOutCartItems";
 
 function CheckoutPage() {
   const { calculateTotal, cartItems } = contextProvider();
@@ -144,21 +145,7 @@ function CheckoutPage() {
           </thead>
           <tbody>
             {cartItems.map((element) => (
-              <tr key={element.id} className="border-b border-gray-200">
-                <td className="flex items-center p-3 h-28 w-3/4">
-                  <img
-                    src={element.img}
-                    alt={element.name}
-                    className="h-14 w-14 mr-2 rounded-md"
-                  />
-                  <div>
-                    {element.name} x {element.count}
-                  </div>
-                </td>
-                <td className="text-right p-3 w-1/4">
-                  <div>${element.price * element.count}</div>
-                </td>
-              </tr>
+              <CheckOutCartItems element={element}/>
             ))}
             <tr className="border-t border-gray-200">
               <td className="text-left text-md p-3 h-16 w-3/4 ">SubTotal</td>

@@ -9,7 +9,8 @@ import ProductPage from "./pages/ProductPage";
 import CartItemList from "./components/CartItemList";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderPage from "./pages/OrderPage";
-import { AuthProvider, PrivateRoute } from "./context/AuthProvider";
+import { AuthProvider} from "./context/AuthProvider";
+import PrivateRoute from "./router/PrivateRoute";
 
 function App() {
   return (

@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface Item {
   id: string;
   name: string;
@@ -26,4 +28,14 @@ export interface Context {
   calculateTotal: { total: number };
   isCheckoutComplete: boolean;
   completeCheckout: () => void;
+}
+
+export interface AuthProps {
+  isAuthenticated: boolean;
+  login: () => void;
+  logout: () => void;
+}
+
+export interface AuthProviderProps {
+  children: ReactNode;
 }

@@ -1,22 +1,12 @@
-import React, {
+import {
   createContext,
-  ReactNode,
   useContext,
   useState,
   useCallback,
   useMemo,
 } from "react";
 import { Navigate } from "react-router-dom";
-
-export interface AuthProps {
-  isAuthenticated: boolean;
-  login: () => void;
-  logout: () => void;
-}
-
-export interface AuthProviderProps {
-  children: ReactNode;
-}
+import { AuthProps, AuthProviderProps } from "../type/Type";
 
 const AuthContext = createContext<AuthProps | undefined>(undefined);
 
@@ -49,9 +39,4 @@ export const useAuth = () => {
     throw new Error("Error accessing auth context");
   }
   return context;
-};
-
-export const PrivateRoute = ({ children }: AuthProviderProps) => {
-  const { isAuthenticated } = useAuth();
-  return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
 };
