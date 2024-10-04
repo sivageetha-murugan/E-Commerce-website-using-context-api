@@ -16,8 +16,9 @@ function NavBar() {
       <nav className="h-20 w-full">
         <div className="flex">
           <div className="flex w-1/3 h-20 gap-x-6 justify-center items-center">
-            {categories.map((element) => (
+            {categories.map((element, index) => (
               <NavLink
+              index={index}
                 classList={"text-md font-light"}
                 toLink={`/category/${element.name}`}
               >
@@ -35,8 +36,8 @@ function NavBar() {
           </div>
           <div className="flex w-1/3 h-20 gap-x-6 justify-center items-center">
             {[{ name: "Home" }, { name: "About" }, { name: "Contact" }].map(
-              (element) => (
-                <NavLink classList={"text-md font-light"} toLink={element.name}>
+              (element, index) => (
+                <NavLink index={index} classList={"text-md font-light"} toLink={element.name}>
                   {element.name}
                 </NavLink>
               )

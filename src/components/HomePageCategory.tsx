@@ -23,7 +23,7 @@ function HomePageCategory(props: {
 
   const navigate = useNavigate();
   return (
-    <div className="mt-8 " key={props.index}>
+    <div className="mt-8 " key={`${props.element.id} ${props.index}`}>
       <div className="p-4 flex  justify-between items-center me-4">
         <div className="text-4xl font-bold uppercase">{props.element.name}</div>
         <Button

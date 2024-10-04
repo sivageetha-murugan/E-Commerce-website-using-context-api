@@ -39,3 +39,29 @@ export interface AuthProps {
 export interface AuthProviderProps {
   children: ReactNode;
 }
+
+export interface Address {
+  userName: string,
+  firstName: string,
+  lastName: string,
+  companyName: string,
+  houseNo: string,
+  street?: string,
+  town: string,
+  state: string,
+  code: string,
+  phoneNumber: string
+}
+
+export interface AppContextProviderProps {
+  children: ReactNode;
+}
+
+export interface Order {
+  orderNumber?: number,
+  date: string,
+  total: number,
+  paymentMethod: string
+  items: CartItem[]
+  address: Address
+}

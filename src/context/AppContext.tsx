@@ -1,17 +1,12 @@
 import {
   createContext,
-  ReactNode,
   useContext,
   useState,
   useCallback,
   useMemo,
 } from "react";
-import { Item, Category, CartItem, Context } from "../type/Type";
+import { Item, Category, CartItem, Context, AppContextProviderProps } from "../type/Type";
 import { categoryList, productList } from "../data/ProductData";
-
-interface AppContextProviderProps {
-  children: ReactNode;
-}
 
 const AppContext = createContext<Context | undefined>(undefined);
 

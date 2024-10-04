@@ -6,9 +6,10 @@ import CheckOutCartItems from "../components/CheckOutCartItems";
 function CheckoutPage() {
   const { calculateTotal, cartItems } = contextProvider();
   const navigate = useNavigate();
+
   return (
     <div className="flex">
-      <div className="w-3/5 p-4 space-y-5">
+      <form className="w-3/5 p-4 space-y-5">
         <div className="text-lg border-b border-gray-200 h-10 w-56">
           CUSTOMER INFORMATION
         </div>
@@ -17,6 +18,7 @@ function CheckoutPage() {
             type="text"
             placeholder="Username or Email Address*"
             className="border border-gray-200 w-full rounded-md h-10 ps-3"
+            required={true}
           />
         </div>
         <div className="text-lg border-b border-gray-200 h-10 w-full">
@@ -27,11 +29,13 @@ function CheckoutPage() {
             type="text"
             placeholder="First name*"
             className="border border-gray-200 w-1/2 rounded-md h-10 ps-3"
+            required={true}
           />
           <input
             type="text"
             placeholder="Last name*"
             className="border border-gray-200 w-1/2 rounded-md h-10 ps-3"
+            required={true}
           />
         </div>
         <div>
@@ -39,6 +43,7 @@ function CheckoutPage() {
             type="text"
             placeholder="Company name"
             className="border border-gray-200 w-full rounded-md h-10 ps-3"
+            required={true}
           />
         </div>
         <div className="flex gap-x-4">
@@ -46,6 +51,7 @@ function CheckoutPage() {
             type="text"
             placeholder="House number and street name"
             className="border border-gray-200 w-1/2 rounded-md h-10 ps-3"
+            required={true}
           />
           <input
             type="text"
@@ -58,16 +64,19 @@ function CheckoutPage() {
             type="text"
             placeholder="Town/City*"
             className="border border-gray-200 w-1/3 rounded-md h-10 ps-3"
+            required={true}
           />
           <input
             type="text"
             placeholder="State"
             className="border border-gray-200 w-1/3 rounded-md h-10 ps-3"
+            required={true}
           />
           <input
             type="text"
             placeholder="ZIP Code"
             className="border border-gray-200 w-1/3 rounded-md h-10 ps-3"
+            required={true}
           />
         </div>
         <div>
@@ -75,6 +84,7 @@ function CheckoutPage() {
             type="text"
             placeholder="Phone*"
             className="border border-gray-200 w-full rounded-md h-10 ps-3"
+            required={true}
           />
         </div>
         <div className="text-lg border-b border-gray-200 h-10 w-full">
@@ -100,6 +110,8 @@ function CheckoutPage() {
                   name="paymentMethod"
                   id="dbf"
                   className=""
+            required={true}
+
                 />
               </td>
               <td className="pl-2 w-11/12">
@@ -118,7 +130,7 @@ function CheckoutPage() {
         </table>
         <div>
           <Button
-            type="submit"
+            type="button"
             className="border border-black w-full font-medium text-base h-14 tracking-widest flex items-center justify-center gap-3"
             onClick={() => {
               navigate("/orders");
@@ -129,7 +141,7 @@ function CheckoutPage() {
           </Button>
           <button type="submit"></button>
         </div>
-      </div>
+      </form>
       <div className="w-2/5 p-4 ">
         <div className="text-lg h-10 w-56">YOUR ORDER</div>
         <table className="w-full rounded-md border-collapse border table-fixed">
@@ -145,7 +157,7 @@ function CheckoutPage() {
           </thead>
           <tbody>
             {cartItems.map((element) => (
-              <CheckOutCartItems element={element}/>
+              <CheckOutCartItems element={element} />
             ))}
             <tr className="border-t border-gray-200">
               <td className="text-left text-md p-3 h-16 w-3/4 ">SubTotal</td>

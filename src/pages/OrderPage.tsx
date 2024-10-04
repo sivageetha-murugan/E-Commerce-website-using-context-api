@@ -1,5 +1,6 @@
 import React from "react";
 import { contextProvider } from "../context/AppContext";
+import OrderCartItems from "../components/OrderCartItems";
 
 function OrderPage() {
   const { calculateTotal, cartItems } = contextProvider();
@@ -41,15 +42,7 @@ function OrderPage() {
           </thead>
           <tbody>
             {cartItems.map((element) => (
-              <tr key={element.id} className="border-b border-gray-200">
-                <td className="flex items-center p-3 h-16 w-3/4">
-                  <div>{element.name} x</div>
-                  <div className="font-medium ms-1">{element.count}</div>
-                </td>
-                <td className="text-right p-3 w-1/4">
-                  <div>${element.price * element.count}</div>
-                </td>
-              </tr>
+              <OrderCartItems element={element}/>
             ))}
             <tr className="border-t border-gray-200">
               <td className="text-left text-md p-3 h-16 w-3/4 ">SubTotal:</td>

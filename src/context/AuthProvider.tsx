@@ -5,7 +5,6 @@ import {
   useCallback,
   useMemo,
 } from "react";
-import { Navigate } from "react-router-dom";
 import { AuthProps, AuthProviderProps } from "../type/Type";
 
 const AuthContext = createContext<AuthProps | undefined>(undefined);
