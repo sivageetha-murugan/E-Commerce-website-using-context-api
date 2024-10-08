@@ -1,13 +1,14 @@
-import { contextProvider } from "../context/AppContext";
+import { useAppContext } from "../context/AppContext";
 import HomePageCategory from "../components/HomePageCategory";
+import { HomePageProps } from "../type/Type";
 
-function HomePage(props: { page: string }) {
-  const { categories } = contextProvider();
+function HomePage({ page }: HomePageProps) {
+  const { categories } = useAppContext();
   return (
     <>
       <div className="p-8">
         {categories.map((element, index) => (
-          <HomePageCategory index={index} element={element} page={props.page} />
+          <HomePageCategory index={index} element={element} page={page} />
         ))}
       </div>
     </>

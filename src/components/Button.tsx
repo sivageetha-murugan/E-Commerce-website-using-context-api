@@ -5,6 +5,7 @@ interface ButtonType {
   children: React.ReactNode;
   onClick?: () => void;
   variant?: string;
+  disabled?: boolean
 }
 
 function Button({

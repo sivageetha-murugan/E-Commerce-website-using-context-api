@@ -1,11 +1,32 @@
-import { contextProvider } from "../context/AppContext";
+import { useAppContext } from "../context/AppContext";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
-import CheckOutCartItems from "../components/CheckOutCartItems";
+import CartItemsInCheckout from "../components/CartItemsInCheckout";
+import { useState } from "react";
+import { Order } from "../type/Type";
+import InputField from "../components/InputField";
+import calculateTotal from "../utils/CalculateTotal";
 
 function CheckoutPage() {
-  const { calculateTotal, cartItems } = contextProvider();
+  const { cartItems, completeCheckout } = useAppContext();
   const navigate = useNavigate();
+  const [userName, setUserName] = useState<string>();
+  const [order, setOrder] = useState<Order>();
+  const [orderNumber, setOrderNumber] = useState<number>();
+  const [date, setDate] = useState<string>();
+  const [totalAmount, setTotalAmount] = useState<number>();
+  const [paymentMethod, setPaymentMethod] =
+    useState<string>("Cash on delivery");
+  const [companyName, setCompanyName] = useState<string>();
+  const [firstName, setFirstName] = useState<string>();
+  const [lastName, setLastName] = useState<string>();
+  const [houseNo, setHouseNo] = useState<string>();
+  const [street, setStreet] = useState<string>();
+  const [town, setTown] = useState<string>();
+  const [state, setState] = useState<string>();
+  const [code, setCode] = useState<string>();
+  const [phoneNumber, setPhoneNumber] = useState<string>();
+  const { total} = calculateTotal();
 
   return (
     <div className="flex">
@@ -14,77 +35,88 @@ function CheckoutPage() {
           CUSTOMER INFORMATION
         </div>
         <div>
-          <input
+          <InputField
+            className="border border-gray-200 w-full rounded-md h-10 ps-3"
             type="text"
             placeholder="Username or Email Address*"
-            className="border border-gray-200 w-full rounded-md h-10 ps-3"
-            required={true}
+            value={userName}
+            onChange={(event) => setUserName(event.target.value)}
           />
         </div>
         <div className="text-lg border-b border-gray-200 h-10 w-full">
           BILLING DETAILS
         </div>
         <div className="flex gap-x-4">
-          <input
+          <InputField
+            className="border border-gray-200 w-1/2 rounded-md h-10 ps-3"
             type="text"
             placeholder="First name*"
-            className="border border-gray-200 w-1/2 rounded-md h-10 ps-3"
-            required={true}
+            value={firstName}
+            onChange={(event) => setFirstName(event.target.value)}
           />
-          <input
+          <InputField
+            className="border border-gray-200 w-1/2 rounded-md h-10 ps-3"
             type="text"
             placeholder="Last name*"
-            className="border border-gray-200 w-1/2 rounded-md h-10 ps-3"
-            required={true}
+            value={lastName}
+            onChange={(event) => setLastName(event.target.value)}
           />
         </div>
         <div>
-          <input
+          <InputField
+            className="border border-gray-200 w-full rounded-md h-10 ps-3"
             type="text"
             placeholder="Company name"
-            className="border border-gray-200 w-full rounded-md h-10 ps-3"
-            required={true}
+            value={companyName}
+            onChange={(event) => setCompanyName(event.target.value)}
           />
         </div>
         <div className="flex gap-x-4">
-          <input
+        <InputField
+            className="border border-gray-200 w-1/2 rounded-md h-10 ps-3"
             type="text"
             placeholder="House number and street name"
-            className="border border-gray-200 w-1/2 rounded-md h-10 ps-3"
-            required={true}
+            value={houseNo}
+            onChange={(event) => setHouseNo(event.target.value)}
           />
-          <input
+          <InputField
             type="text"
             placeholder="Apartment, suite, unit, etc.(optional)"
             className="border border-gray-200 w-1/2 rounded-md h-10 ps-3"
+            value={street}
+            onChange={(event) => setStreet(event.target.value)}
           />
         </div>
         <div className="flex gap-x-4">
-          <input
+          <InputField
             type="text"
             placeholder="Town/City*"
             className="border border-gray-200 w-1/3 rounded-md h-10 ps-3"
-            required={true}
+            value={town}
+            onChange={(event) => setTown(event.target.value)}
           />
-          <input
+          <InputField
             type="text"
             placeholder="State"
             className="border border-gray-200 w-1/3 rounded-md h-10 ps-3"
-            required={true}
+            value={state}
+            onChange={(event) => setState(event.target.value)}
           />
-          <input
+          <InputField
             type="text"
             placeholder="ZIP Code"
             className="border border-gray-200 w-1/3 rounded-md h-10 ps-3"
-            required={true}
+            value={code}
+            onChange={(event) => setCode(event.target.value)}
           />
         </div>
         <div>
-          <input
+          <InputField
             type="text"
             placeholder="Phone*"
             className="border border-gray-200 w-full rounded-md h-10 ps-3"
-            required={true}
+            value={phoneNumber}
+            onChange={(event) => setPhoneNumber(event.target.value)}
           />
         </div>
         <div className="text-lg border-b border-gray-200 h-10 w-full">
@@ -105,13 +137,13 @@ function CheckoutPage() {
           <tbody>
             <tr className="border-b border-gray-200 h-1/2">
               <td className="p-4 w-1/12">
-                <input
+                <InputField
                   type="radio"
                   name="paymentMethod"
                   id="dbf"
                   className=""
-            required={true}
-
+                  value={"Direct bank transfer"}
+                  onChange={(event) => setPaymentMethod(event.target.value)}
                 />
               </td>
               <td className="pl-2 w-11/12">
@@ -120,7 +152,14 @@ function CheckoutPage() {
             </tr>
             <tr className="border-b border-gray-200 h-1/2">
               <td className="p-4">
-                <input type="radio" name="paymentMethod" id="cod" />
+                <InputField
+                  type="radio"
+                  name="paymentMethod"
+                  id="cod"
+                  className=""
+                  value={"Cash on delivery"}
+                  onChange={(event) => setPaymentMethod(event.target.value)}
+                />
               </td>
               <td className="pl-2">
                 <label htmlFor="cod">Cash on delivery</label>
@@ -132,50 +171,28 @@ function CheckoutPage() {
           <Button
             type="button"
             className="border border-black w-full font-medium text-base h-14 tracking-widest flex items-center justify-center gap-3"
+            disabled={
+              !(
+                userName &&
+                firstName &&
+                lastName &&
+                houseNo &&
+                town &&
+                phoneNumber &&
+                paymentMethod
+              )
+            }
             onClick={() => {
+              completeCheckout();
               navigate("/orders");
             }}
           >
             <i className="fa fa-solid fa-lock"></i>
-            <div>PLACE ORDER ${calculateTotal.total}</div>
+            <div>PLACE ORDER ${total}</div>
           </Button>
-          <button type="submit"></button>
         </div>
       </form>
-      <div className="w-2/5 p-4 ">
-        <div className="text-lg h-10 w-56">YOUR ORDER</div>
-        <table className="w-full rounded-md border-collapse border table-fixed">
-          <thead>
-            <tr className="border-b border-gray-200 h-12">
-              <th className="text-left p-3 w-3/4 text-md font-medium">
-                Product
-              </th>
-              <th className="text-right p-3 w-1/4 text-md font-medium">
-                Subtotal
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {cartItems.map((element) => (
-              <CheckOutCartItems element={element} />
-            ))}
-            <tr className="border-t border-gray-200">
-              <td className="text-left text-md p-3 h-16 w-3/4 ">SubTotal</td>
-              <td className="text-right text-md p-3 h-16 w-3/4 ">
-                ${calculateTotal.total}
-              </td>
-            </tr>
-            <tr className="border-t border-gray-200">
-              <td className="text-left text-lg font-bold p-3 h-16 w-3/4 ">
-                Total
-              </td>
-              <td className="p-3 text-right text-lg font-bold h-16 w-3/4 ">
-                ${calculateTotal.total}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <CartItemsInCheckout />
     </div>
   );
 }

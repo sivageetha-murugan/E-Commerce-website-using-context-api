@@ -1,9 +1,11 @@
-import React from "react";
-import { contextProvider } from "../context/AppContext";
+import { useAppContext } from "../context/AppContext";
 import OrderCartItems from "../components/OrderCartItems";
+import calculateTotal  from "../utils/CalculateTotal";
 
 function OrderPage() {
-  const { calculateTotal, cartItems } = contextProvider();
+  const { cartItems } = useAppContext();
+  const { total} = calculateTotal();
+
   return (
     <div className="w-4/6 flex flex-col justify-between space-y-4 mx-auto">
       <div className="h-28 font-medium text-xl flex justify-center pt-4">
@@ -20,7 +22,7 @@ function OrderPage() {
         </div>
         <div className="flex flex-col">
           <div className="font-thin text-base">Total</div>
-          <div className="font-medium text-base">${calculateTotal.total}</div>
+          <div className="font-medium text-base">{total}</div>
         </div>
         <div className="flex flex-col">
           <div className="font-thin text-base">Payment method:</div>
@@ -47,7 +49,7 @@ function OrderPage() {
             <tr className="border-t border-gray-200">
               <td className="text-left text-md p-3 h-16 w-3/4 ">SubTotal:</td>
               <td className="text-right text-md p-3 h-16 w-3/4 ">
-                ${calculateTotal.total}
+                ${total}
               </td>
             </tr>
             <tr className="border-t border-gray-200">
@@ -63,7 +65,7 @@ function OrderPage() {
                 Total:
               </td>
               <td className="p-3 text-right text-lg font-bold h-16 w-3/4 ">
-                ${calculateTotal.total}
+                ${total}
               </td>
             </tr>
           </tbody>

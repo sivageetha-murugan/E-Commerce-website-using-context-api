@@ -2,8 +2,6 @@ import {
   createContext,
   useContext,
   useState,
-  useCallback,
-  useMemo,
 } from "react";
 import { AuthProps, AuthProviderProps } from "../type/Type";
 
@@ -12,18 +10,15 @@ const AuthContext = createContext<AuthProps | undefined>(undefined);
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
-  const login = useCallback(() => setIsAuthenticated(true), []);
+  const login = () => setIsAuthenticated(true);
 
-  const logout = useCallback(() => setIsAuthenticated(false), []);
+  const logout = () => setIsAuthenticated(false);
 
-  const authContextValue = useMemo<AuthProps>(
-    () => ({
+  const authContextValue: AuthProps = {
       isAuthenticated,
       login,
       logout,
-    }),
-    [isAuthenticated, login, logout]
-  );
+    }
 
   return (
     <AuthContext.Provider value={authContextValue}>

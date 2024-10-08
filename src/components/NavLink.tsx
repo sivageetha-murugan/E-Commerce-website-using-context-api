@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import { NavLinkProps } from "../type/Type";
 
-function NavLink(props: {classList: string, toLink: string, children: string, index: number}) {
+function NavLink({className, toLink, children, index} : NavLinkProps) {
   return (
-    <div key={`${props.index} ${props.children}`} className={`${props.classList} uppercase`}>
-      <Link to={`${props.toLink}`}>{props.children}</Link>
+    <div key={`${index} ${children}`} className={`${className} uppercase`}>
+      <Link to={`${toLink}`}>{children}</Link>
     </div>
   );
 }

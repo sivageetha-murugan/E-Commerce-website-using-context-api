@@ -11,6 +11,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import OrderPage from "./pages/OrderPage";
 import { AuthProvider} from "./context/AuthProvider";
 import PrivateRoute from "./router/PrivateRoute";
+import { BASEPATH, BRACELETSPATH, CARTPATH, CATEGORYPATH, CHECKOUTPATH, EARRINGSPATH, HOMEPATH, LOGINPATH, NECKLACESPATH, ORDERSPATH, RINGSPATH } from "./utils/constants";
 
 function App() {
   return (
@@ -19,12 +20,12 @@ function App() {
         <AppContextProvider>
           <AuthProvider>
             <Routes>
-              <Route path="/">
-                <Route path="/login" element={<LoginPage />} />
-                <Route index element={<Navigate to="/login" />}></Route>
+              <Route path={BASEPATH}>
+                <Route path={LOGINPATH} element={<LoginPage />} />
+                <Route index element={<Navigate to={LOGINPATH} />}></Route>
                 <Route element={<NavBar />}>
                   <Route
-                    path="/Home"
+                    path={HOMEPATH}
                     element={
                       <PrivateRoute>
                         <HomePage page="Home" />
@@ -38,13 +39,13 @@ function App() {
                       </PrivateRoute>
                     }
                   >
-                    <Route path="/Cart" element={<CartItemList />} />
-                    <Route path="/checkout" element={<CheckoutPage />} />
-                    <Route path="/orders" element={<OrderPage />} />
+                    <Route path={CARTPATH} element={<CartItemList />} />
+                    <Route path={CHECKOUTPATH} element={<CheckoutPage />} />
+                    <Route path={ORDERSPATH} element={<OrderPage />} />
                   </Route>
-                  <Route path="/category">
+                  <Route path={CATEGORYPATH}>
                     <Route
-                      path="Rings"
+                      path={RINGSPATH}
                       element={
                         <PrivateRoute>
                           <ProductPage page="Rings" category="Rings" />
@@ -52,7 +53,7 @@ function App() {
                       }
                     />
                     <Route
-                      path="Bracelets"
+                      path={BRACELETSPATH}
                       element={
                         <PrivateRoute>
                           <ProductPage page="Bracelets" category="Bracelets" />
@@ -60,7 +61,7 @@ function App() {
                       }
                     />
                     <Route
-                      path="Earrings"
+                      path={EARRINGSPATH}
                       element={
                         <PrivateRoute>
                           <ProductPage page="Earrings" category="Earrings" />
@@ -68,7 +69,7 @@ function App() {
                       }
                     />
                     <Route
-                      path="Necklaces"
+                      path={NECKLACESPATH}
                       element={
                         <PrivateRoute>
                           <ProductPage page="Necklaces" category="Necklaces" />

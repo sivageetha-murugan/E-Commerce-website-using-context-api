@@ -1,17 +1,27 @@
-import { contextProvider } from "../context/AppContext";
+import { useAppContext } from "../context/AppContext";
+import { useEffect, useState } from "react";
 import Product from "../components/Product";
+import { Item, ProductPageProps } from "../type/Type";
 
-function ProductPage(props: { page: string; category: string }) {
-  const { product } = contextProvider();
+function ProductPage({ page, category } : ProductPageProps) {
 
-  const products = product.filter(
-    (element) => element.category === props.category
-  );
+  const { product } = useAppContext();
 
-  props.page === "Home" ? (products.length = 4) : products;
+  const [productList, setProductList] = useState<Item[]>([]);
+
+  useEffect(()=> {
+     const products = product.filter(item => item.category === category);
+     if(page === "Home" ) {
+      products.length = 4
+      setProductList(products);
+     } else {
+      setProductList(products);
+     }
+  }, [category, page])
+  
   return (
     <div className="flex flex-wrap gap-5 justify-center items-center pt-5">
-      {products.map((item) => (
+      {productList.map((item) => (
         <Product item={item} index={item.id} />
       ))}
     </div>

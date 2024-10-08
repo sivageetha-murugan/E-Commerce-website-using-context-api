@@ -1,8 +1,8 @@
 import { Outlet, NavLink } from "react-router-dom";
-import { contextProvider } from "../context/AppContext";
+import { useAppContext } from "../context/AppContext";
 
 function CartPage() {
-  const { isCheckoutComplete } = contextProvider();
+  const { isCheckoutComplete } = useAppContext();
   return (
     <>
       <div className="flex flex-col mb-4">

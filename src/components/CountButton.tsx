@@ -1,26 +1,21 @@
 import Button from "./Button";
-import { contextProvider } from "../context/AppContext";
-import { Item } from "../type/Type";
+import { useAppContext } from "../context/AppContext";
+import { CountButtonProps } from "../type/Type";
 
-function CountButton(props: {
-  item: Item;
-  count: number;
-  variant: string;
-  classList: string;
-}) {
-  const { decreaseCountInCart, addItemToCart } = contextProvider();
+function CountButton({ item, count, variant, className }: CountButtonProps) {
+  const { decreaseCountInCart, addItemToCart } = useAppContext();
   return (
     <>
       <Button
-        variant={props.variant}
-        onClick={() => decreaseCountInCart(props.item.id)}
+        variant={variant}
+        onClick={() => decreaseCountInCart(item.id)}
       >
         -
       </Button>
-      <div className={`${props.classList}`}>
-        <div>{props.count}</div>
+      <div className={`${className}`}>
+        <div>{count}</div>
       </div>
-      <Button variant={props.variant} onClick={() => addItemToCart(props.item)}>
+      <Button variant={variant} onClick={() => addItemToCart(item)}>
         +
       </Button>
     </>

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import { useState } from "react";
 import { useAuth } from "../context/AuthProvider";
+import { loginData } from "../data/ProductData";
 
 export interface LoginDetails {
   email: string;
@@ -11,9 +12,7 @@ export interface LoginDetails {
 function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [users] = useState<LoginDetails[]>([
-    { email: "siva@gmail.com", password: "siva" },
-  ]);
+  const [users] = useState<LoginDetails[]>(loginData);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");

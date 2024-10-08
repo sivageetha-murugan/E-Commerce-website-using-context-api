@@ -1,40 +1,42 @@
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
-import { Category } from "../type/Type";
+import { HomePageCategoryProps, Item } from "../type/Type";
 import Product from "./Product";
-import { contextProvider } from "../context/AppContext";
-import { useMemo } from "react";
+import { useAppContext } from "../context/AppContext";
+import { useEffect, useState } from "react";
+import { CATEGORYPATH } from "../utils/constants";
 
-function HomePageCategory(props: {
-  index: number;
-  element: Category;
-  page: string;
-}) {
-  const { product } = contextProvider();
+function HomePageCategory({ index, element, page }: HomePageCategoryProps) {
+  const { product } = useAppContext();
 
-  const products = useMemo(() => {
-    const list = product.filter(
-      (categoryItem) => categoryItem.category === props.element.name
+  const [productList, setProductList] = useState<Item[]>([]);
+
+  useEffect(() => {
+    const products = product.filter(
+      (item) => item.category === element.name
     );
-    return { list };
-  }, [product, props.element.name]);
-
-  props.page === "Home" ? (products.list.length = 4) : products;
+    if (page === "Home") {
+      products.length = 4;
+      setProductList(products);
+    } else {
+      setProductList(products);
+    }
+  }, [element, page]);
 
   const navigate = useNavigate();
   return (
-    <div className="mt-8 " key={`${props.element.id} ${props.index}`}>
+    <div className="mt-8 " key={`${element.id} ${index}`}>
       <div className="p-4 flex  justify-between items-center me-4">
-        <div className="text-4xl font-bold uppercase">{props.element.name}</div>
+        <div className="text-4xl font-bold uppercase">{element.name}</div>
         <Button
           className="underline underline-offset-8"
-          onClick={() => navigate(`/category/${props.element.name}`)}
+          onClick={() => navigate(`${CATEGORYPATH}/${element.name}`)}
         >
           Viewmore
         </Button>
       </div>
       <div className="flex flex-wrap gap-5 justify-center items-center pt-5">
-        {products.list.map((item) => (
+        {productList.map((item) => (
           <Product item={item} index={item.id} />
         ))}
       </div>

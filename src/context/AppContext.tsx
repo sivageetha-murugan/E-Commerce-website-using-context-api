@@ -1,11 +1,11 @@
+import { createContext, useContext, useState, useCallback } from "react";
 import {
-  createContext,
-  useContext,
-  useState,
-  useCallback,
-  useMemo,
-} from "react";
-import { Item, Category, CartItem, Context, AppContextProviderProps } from "../type/Type";
+  Item,
+  Category,
+  CartItem,
+  Context,
+  AppContextProviderProps,
+} from "../type/Type";
 import { categoryList, productList } from "../data/ProductData";
 
 const AppContext = createContext<Context | undefined>(undefined);
@@ -14,13 +14,6 @@ export const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const [product] = useState<Item[]>(productList);
   const [categories] = useState<Category[]>(categoryList);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const calculateTotal = useMemo(() => {
-    let total = 0;
-    cartItems.map((element) => {
-      total += element.count * element.price;
-    });
-    return { total };
-  }, [cartItems]);
 
   const [isCheckoutComplete, setIsCheckoutComplete] = useState(false);
 
@@ -28,37 +21,34 @@ export const AppContextProvider = ({ children }: AppContextProviderProps) => {
     setIsCheckoutComplete(true);
   };
 
-  const addItemToCart = useCallback(
-    (productDetail: Item) => {
-      const isCartItemPresent = cartItems.find(
-        (element) => element.id === productDetail.id
+  const addItemToCart = (productDetail: Item) => {
+    const isCartItemPresent = cartItems.find(
+      (element) => element.id === productDetail.id
+    );
+
+    if (isCartItemPresent) {
+      setCartItems((prevCartItems) =>
+        prevCartItems.map((element) =>
+          element.id === productDetail.id
+            ? { ...element, count: element.count + 1 }
+            : element
+        )
       );
+    } else {
+      setCartItems((prevCartItems) => [
+        ...prevCartItems,
+        { ...productDetail, count: 1 },
+      ]);
+    }
+  };
 
-      if (isCartItemPresent) {
-        setCartItems((prevCartItems) =>
-          prevCartItems.map((element) =>
-            element.id === productDetail.id
-              ? { ...element, count: element.count + 1 }
-              : element
-          )
-        );
-      } else {
-        setCartItems((prevCartItems) => [
-          ...prevCartItems,
-          { ...productDetail, count: 1 },
-        ]);
-      }
-    },
-    [cartItems]
-  );
-
-  const removeCartItem = useCallback((product: Item) => {
+  const removeCartItem = (product: Item) => {
     setCartItems((prevCartItems) =>
       prevCartItems.filter((element) => element.id !== product.id)
     );
-  }, []);
+  }
 
-  const decreaseCountInCart = useCallback((id: string) => {
+  const decreaseCountInCart = (id: string) => {
     setCartItems((prevCartItems) =>
       prevCartItems
         .map((element) =>
@@ -68,7 +58,7 @@ export const AppContextProvider = ({ children }: AppContextProviderProps) => {
         )
         .filter((element) => element.count > 0)
     );
-  }, []);
+  }
 
   const contextValue: Context = {
     product,
@@ -77,7 +67,6 @@ export const AppContextProvider = ({ children }: AppContextProviderProps) => {
     addItemToCart,
     decreaseCountInCart,
     removeCartItem,
-    calculateTotal,
     isCheckoutComplete,
     completeCheckout,
   };
@@ -87,7 +76,7 @@ export const AppContextProvider = ({ children }: AppContextProviderProps) => {
   );
 };
 
-export const contextProvider = (): Context => {
+export const useAppContext = (): Context => {
   const contextObj = useContext(AppContext);
   if (!contextObj) {
     throw new Error("Error accessing context");

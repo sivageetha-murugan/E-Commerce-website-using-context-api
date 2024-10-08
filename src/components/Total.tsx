@@ -1,7 +1,8 @@
-import { contextProvider } from "../context/AppContext";
+import calculateTotal from "../utils/CalculateTotal";
 
 function Total() {
-  const { calculateTotal } = contextProvider();
+
+  const { total} = calculateTotal();
 
   return (
     <div className="w-1/4 p-4 bg-orange-50 h-56">
@@ -14,11 +15,11 @@ function Total() {
         <tbody>
           <tr className="border-b">
             <td className="py-2 px-3">Subtotal</td>
-            <td className="py-2">${calculateTotal.total}</td>
+            <td className="py-2">${total}</td>
           </tr>
           <tr>
             <td className="py-2 font-semibold px-3">Total</td>
-            <td className="py-2 font-semibold">${calculateTotal.total}</td>
+            <td className="py-2 font-semibold">${total}</td>
           </tr>
         </tbody>
       </table>

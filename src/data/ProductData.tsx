@@ -111,3 +111,11 @@ export const categoryList: Category[] = [
   { id: "trdk", name: "Earrings" },
   { id: "spmb", name: "Necklaces" },
 ];
+
+export const navBarList = [
+  { name: "Home" },
+  { name: "About" },
+  { name: "Contact" },
+];
+
+export const loginData = [{ email: "siva@gmail.com", password: "siva" }];
