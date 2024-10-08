@@ -6,9 +6,10 @@ import { useState } from "react";
 import { Order } from "../type/Type";
 import InputField from "../components/InputField";
 import calculateTotal from "../utils/CalculateTotal";
+import { actionTypes } from "../enums/actions";
 
 function CheckoutPage() {
-  const { cartItems, completeCheckout } = useAppContext();
+  const { dispatch } = useAppContext();
   const navigate = useNavigate();
   const [userName, setUserName] = useState<string>();
   const [order, setOrder] = useState<Order>();
@@ -23,10 +24,14 @@ function CheckoutPage() {
   const [houseNo, setHouseNo] = useState<string>();
   const [street, setStreet] = useState<string>();
   const [town, setTown] = useState<string>();
-  const [state, setState] = useState<string>();
+  // const [state, setState] = useState<string>();
   const [code, setCode] = useState<string>();
   const [phoneNumber, setPhoneNumber] = useState<string>();
-  const { total} = calculateTotal();
+  const { total } = calculateTotal();
+  const handleCheckout = () => {
+    dispatch({ type: actionTypes.COMPLETE_CHECKOUT, payload: true });
+    navigate("/orders");
+  };
 
   return (
     <div className="flex">
@@ -72,7 +77,7 @@ function CheckoutPage() {
           />
         </div>
         <div className="flex gap-x-4">
-        <InputField
+          <InputField
             className="border border-gray-200 w-1/2 rounded-md h-10 ps-3"
             type="text"
             placeholder="House number and street name"
@@ -99,8 +104,8 @@ function CheckoutPage() {
             type="text"
             placeholder="State"
             className="border border-gray-200 w-1/3 rounded-md h-10 ps-3"
-            value={state}
-            onChange={(event) => setState(event.target.value)}
+            // value={state}
+            // onChange={(event) => setState(event.target.value)}
           />
           <InputField
             type="text"
@@ -183,8 +188,7 @@ function CheckoutPage() {
               )
             }
             onClick={() => {
-              completeCheckout();
-              navigate("/orders");
+              handleCheckout();
             }}
           >
             <i className="fa fa-solid fa-lock"></i>

@@ -3,15 +3,13 @@ import HomePageCategory from "../components/HomePageCategory";
 import { HomePageProps } from "../type/Type";
 
 function HomePage({ page }: HomePageProps) {
-  const { categories } = useAppContext();
+  const { state } = useAppContext();
   return (
-    <>
-      <div className="p-8">
-        {categories.map((element, index) => (
-          <HomePageCategory index={index} element={element} page={page} />
-        ))}
-      </div>
-    </>
+    <div className="p-8">
+      {state.categories.map((element, index) => (
+        <HomePageCategory index={index} element={element} page={page} />
+      ))}
+    </div>
   );
 }
 

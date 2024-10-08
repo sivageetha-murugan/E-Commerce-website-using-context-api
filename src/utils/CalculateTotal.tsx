@@ -3,11 +3,11 @@ import { useAppContext } from "../context/AppContext";
 import { TotalValue } from "../type/Type";
 
 export default function calculateTotal(): TotalValue  {
-  const {cartItems} = useAppContext();
+  const {state} = useAppContext();
 
   const total = useMemo(() => {
-    return cartItems.reduce((acc, item) => acc + item.count * item.price, 0);
-  }, [cartItems]);
+    return state.cartItems.reduce((acc, item) => acc + item.count * item.price, 0);
+  }, [state.cartItems]);
 
   return {total}
 }

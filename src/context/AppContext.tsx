@@ -1,74 +1,83 @@
-import { createContext, useContext, useState, useCallback } from "react";
+import { createContext, useContext, useReducer } from "react";
 import {
-  Item,
-  Category,
-  CartItem,
   Context,
   AppContextProviderProps,
+  ActionType,
+  InitialState,
 } from "../type/Type";
 import { categoryList, productList } from "../data/ProductData";
+import { actionTypes } from "../enums/actions";
 
 const AppContext = createContext<Context | undefined>(undefined);
 
-export const AppContextProvider = ({ children }: AppContextProviderProps) => {
-  const [product] = useState<Item[]>(productList);
-  const [categories] = useState<Category[]>(categoryList);
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+const initialState: InitialState = {
+  product: productList,
+  categories: categoryList,
+  cartItems: [],
+  isCheckoutComplete: false,
+};
 
-  const [isCheckoutComplete, setIsCheckoutComplete] = useState(false);
-
-  const completeCheckout = () => {
-    setIsCheckoutComplete(true);
-  };
-
-  const addItemToCart = (productDetail: Item) => {
-    const isCartItemPresent = cartItems.find(
-      (element) => element.id === productDetail.id
-    );
-
-    if (isCartItemPresent) {
-      setCartItems((prevCartItems) =>
-        prevCartItems.map((element) =>
-          element.id === productDetail.id
-            ? { ...element, count: element.count + 1 }
-            : element
-        )
+const reducer = (state: InitialState, action: ActionType): any => {
+  switch (action.type) {
+    case actionTypes.ADD_ITEM_TO_CART: {
+      const { productDetail } = action.payload;
+      const isCartItemPresent = state.cartItems.find(
+        (element) => element.id === productDetail.id
       );
-    } else {
-      setCartItems((prevCartItems) => [
-        ...prevCartItems,
-        { ...productDetail, count: 1 },
-      ]);
+
+      const updateCartItems = isCartItemPresent
+        ? state.cartItems.map((element) =>
+            element.id === productDetail.id
+              ? { ...element, count: element.count + 1 }
+              : element
+          )
+        : [...state.cartItems, { ...productDetail, count: 1 }];
+
+      return { ...state, cartItems: updateCartItems };
     }
-  };
 
-  const removeCartItem = (product: Item) => {
-    setCartItems((prevCartItems) =>
-      prevCartItems.filter((element) => element.id !== product.id)
-    );
-  }
+    case actionTypes.DECREASE_COUNT_IN_CART: {
+      const { productId } = action.payload;
+      return {
+        ...state,
+        cartItems: state.cartItems
+          .map((element) =>
+            element.id === productId && element.count > 0
+              ? { ...element, count: element.count - 1 }
+              : element
+          )
+          .filter((element) => element.count > 0),
+      };
+    }
 
-  const decreaseCountInCart = (id: string) => {
-    setCartItems((prevCartItems) =>
-      prevCartItems
-        .map((element) =>
-          element.id === id && element.count > 0
-            ? { ...element, count: element.count - 1 }
-            : element
-        )
-        .filter((element) => element.count > 0)
-    );
+    case actionTypes.REMOVE_FROM_CART: {
+      const { productDetail } = action.payload;
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(
+          (element) => element.id !== productDetail.id
+        ),
+      };
+    }
+
+    case actionTypes.COMPLETE_CHECKOUT: {
+      return {
+        ...state,
+        isCheckoutComplete: action.payload,
+      };
+    }
+
+    default:
+      return state;
   }
+};
+
+export const AppContextProvider = ({ children }: AppContextProviderProps) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const contextValue: Context = {
-    product,
-    cartItems,
-    categories,
-    addItemToCart,
-    decreaseCountInCart,
-    removeCartItem,
-    isCheckoutComplete,
-    completeCheckout,
+    state,
+    dispatch,
   };
 
   return (

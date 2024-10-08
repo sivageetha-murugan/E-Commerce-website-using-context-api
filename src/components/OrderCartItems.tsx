@@ -1,8 +1,7 @@
 import { useMemo } from "react";
 import { OrderCartItemsProps } from "../type/Type";
 
-function OrderCartItems({ element } : OrderCartItemsProps) {
-
+function OrderCartItems({ element }: OrderCartItemsProps) {
   const calculatePrice = useMemo(() => {
     const price = element.count * element.price;
     return price;

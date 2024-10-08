@@ -5,16 +5,10 @@ interface ButtonType {
   children: React.ReactNode;
   onClick?: () => void;
   variant?: string;
-  disabled?: boolean
+  disabled?: boolean;
 }
 
-function Button({
-  type,
-  className,
-  children,
-  variant,
-  ...rest
-}: ButtonType) {
+function Button({ type, className, children, variant, ...rest }: ButtonType) {
   return (
     <button type={type} className={`${variant} ${className}`} {...rest}>
       {children}

@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { actionTypes } from "../enums/actions";
 
 export interface Item {
   id: string;
@@ -19,14 +20,16 @@ export interface CartItem extends Item {
 }
 
 export interface Context {
-  product: Item[];
-  cartItems: CartItem[];
-  categories: Category[];
-  addItemToCart: (product: Item) => void;
-  decreaseCountInCart: (id: string) => void;
-  removeCartItem: (product: Item) => void;
-  isCheckoutComplete: boolean;
-  completeCheckout: () => void;
+  // product: Item[];
+  // cartItems: CartItem[];
+  // categories: Category[];
+  // addItemToCart: (product: Item) => void;
+  // decreaseCountInCart: (id: string) => void;
+  // removeCartItem: (product: Item) => void;
+  // isCheckoutComplete: boolean;
+  // completeCheckout: () => void;
+  state : InitialState
+  dispatch: React.Dispatch<ActionType>
 }
 
 export interface AuthProps {
@@ -124,4 +127,16 @@ export interface HomePageProps {
 export interface ProductPageProps {
   page: string;
   category: string;
+}
+
+export interface ActionType {
+  type: actionTypes;
+  payload?: any;
+}
+
+export interface InitialState {
+  product: Item[];
+  categories: Category[];
+  cartItems: CartItem[];
+  isCheckoutComplete: boolean;
 }

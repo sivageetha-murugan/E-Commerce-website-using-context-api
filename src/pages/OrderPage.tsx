@@ -1,10 +1,10 @@
 import { useAppContext } from "../context/AppContext";
 import OrderCartItems from "../components/OrderCartItems";
-import calculateTotal  from "../utils/CalculateTotal";
+import calculateTotal from "../utils/CalculateTotal";
 
 function OrderPage() {
-  const { cartItems } = useAppContext();
-  const { total} = calculateTotal();
+  const { state } = useAppContext();
+  const { total } = calculateTotal();
 
   return (
     <div className="w-4/6 flex flex-col justify-between space-y-4 mx-auto">
@@ -43,14 +43,12 @@ function OrderPage() {
             </tr>
           </thead>
           <tbody>
-            {cartItems.map((element) => (
-              <OrderCartItems element={element}/>
+            {state.cartItems.map((element) => (
+              <OrderCartItems element={element} />
             ))}
             <tr className="border-t border-gray-200">
               <td className="text-left text-md p-3 h-16 w-3/4 ">SubTotal:</td>
-              <td className="text-right text-md p-3 h-16 w-3/4 ">
-                ${total}
-              </td>
+              <td className="text-right text-md p-3 h-16 w-3/4 ">${total}</td>
             </tr>
             <tr className="border-t border-gray-200">
               <td className="text-left text-md p-3 h-16 w-3/4 ">

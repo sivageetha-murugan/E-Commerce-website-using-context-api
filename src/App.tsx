@@ -1,4 +1,4 @@
-import "./App.css";
+import "../src/scss/app.scss";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -9,9 +9,21 @@ import ProductPage from "./pages/ProductPage";
 import CartItemList from "./components/CartItemList";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderPage from "./pages/OrderPage";
-import { AuthProvider} from "./context/AuthProvider";
+import { AuthProvider } from "./context/AuthProvider";
 import PrivateRoute from "./router/PrivateRoute";
-import { BASEPATH, BRACELETSPATH, CARTPATH, CATEGORYPATH, CHECKOUTPATH, EARRINGSPATH, HOMEPATH, LOGINPATH, NECKLACESPATH, ORDERSPATH, RINGSPATH } from "./utils/constants";
+import {
+  BASEPATH,
+  BRACELETSPATH,
+  CARTPATH,
+  CATEGORYPATH,
+  CHECKOUTPATH,
+  EARRINGSPATH,
+  HOMEPATH,
+  LOGINPATH,
+  NECKLACESPATH,
+  ORDERSPATH,
+  RINGSPATH,
+} from "./utils/constants";
 
 function App() {
   return (

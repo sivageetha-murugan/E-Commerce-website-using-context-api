@@ -2,7 +2,7 @@ import { Outlet, NavLink } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
 
 function CartPage() {
-  const { isCheckoutComplete } = useAppContext();
+  const { state } = useAppContext();
   return (
     <>
       <div className="flex flex-col mb-4">
@@ -51,10 +51,10 @@ function CartPage() {
           </NavLink>
           <div>{">"}</div>
           <NavLink
-            to={isCheckoutComplete ? "/orders" : "#"}
+            to={state.isCheckoutComplete ? "/orders" : "#"}
             className={({ isActive }) =>
               `flex gap-2 ${
-                isCheckoutComplete
+                state.isCheckoutComplete
                   ? isActive
                     ? "text-amber-700"
                     : "text-zinc-400"
@@ -66,7 +66,7 @@ function CartPage() {
               <div className="flex gap-2">
                 <div
                   className={`px-2 rounded-2xl border text-center text-light ${
-                    isCheckoutComplete
+                    state.isCheckoutComplete
                       ? isActive
                         ? "bg-amber-700"
                         : "bg-zinc-400"

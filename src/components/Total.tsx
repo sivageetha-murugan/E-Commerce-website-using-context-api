@@ -1,8 +1,7 @@
 import calculateTotal from "../utils/CalculateTotal";
 
 function Total() {
-
-  const { total} = calculateTotal();
+  const { total } = calculateTotal();
 
   return (
     <div className="w-1/4 p-4 bg-orange-50 h-56">

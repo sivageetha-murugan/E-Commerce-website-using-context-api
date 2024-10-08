@@ -7,14 +7,12 @@ import { useEffect, useState } from "react";
 import { CATEGORYPATH } from "../utils/constants";
 
 function HomePageCategory({ index, element, page }: HomePageCategoryProps) {
-  const { product } = useAppContext();
+  const { state } = useAppContext();
 
   const [productList, setProductList] = useState<Item[]>([]);
 
   useEffect(() => {
-    const products = product.filter(
-      (item) => item.category === element.name
-    );
+    const products = state.product.filter((item) => item.category === element.name);
     if (page === "Home") {
       products.length = 4;
       setProductList(products);

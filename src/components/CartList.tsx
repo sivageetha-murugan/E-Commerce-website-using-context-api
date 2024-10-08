@@ -3,14 +3,14 @@ import { useAppContext } from "../context/AppContext";
 import { CartListProps } from "../type/Type";
 import CountButton from "./CountButton";
 import { useMemo } from "react";
+import { actionTypes } from "../enums/actions";
 
-function CartList({ element, key } : CartListProps) {
-
-  const { removeCartItem } = useAppContext();
+function CartList({ element, key }: CartListProps) {
+  const { dispatch } = useAppContext();
   const calculatePrice = useMemo(() => {
-    const price = element.count * element.price
+    const price = element.count * element.price;
     return price;
-  }, [element])
+  }, [element]);
 
   return (
     <tr
@@ -21,7 +21,7 @@ function CartList({ element, key } : CartListProps) {
         <Button
           className="border rounded-full p-1"
           onClick={() => {
-            removeCartItem(element);
+            dispatch({ type: actionTypes.REMOVE_FROM_CART, payload: { element } });;
           }}
         >
           ✖

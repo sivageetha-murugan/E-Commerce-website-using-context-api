@@ -3,12 +3,12 @@ import CartItemsInCart from "./CartItemsInCart.tsx";
 import EmptyCart from "./EmptyCart.tsx";
 
 function CartItemList() {
-  const { cartItems } = useAppContext();
+  const { state } = useAppContext();
   return (
     <>
-      {!!cartItems.length && <CartItemsInCart />}
+      {!!state.cartItems.length && <CartItemsInCart />}
 
-      {!!!cartItems.length && <EmptyCart />}
+      {!!!state.cartItems.length && <EmptyCart />}
     </>
   );
 }

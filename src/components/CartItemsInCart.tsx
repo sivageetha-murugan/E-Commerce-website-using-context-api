@@ -3,7 +3,7 @@ import CartList from "./CartList";
 import Total from "./Total";
 
 function CartItemsInCart() {
-  const {cartItems} = useAppContext();
+  const { state } = useAppContext();
   return (
     <div className="flex p-3 gap-3">
       <div className="w-3/4">
@@ -28,7 +28,7 @@ function CartItemsInCart() {
               </tr>
             </thead>
             <tbody>
-              {cartItems.map((element, index) => (
+              {state.cartItems.map((element, index) => (
                 <CartList element={element} key={`${index} ${element.id}`} />
               ))}
             </tbody>

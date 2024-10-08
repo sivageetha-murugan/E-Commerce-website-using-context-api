@@ -6,21 +6,21 @@ import { CARTPATH, HOMEPATH } from "../utils/constants";
 import { navBarList } from "../data/ProductData";
 
 function NavBar() {
-  const { cartItems, categories } = useAppContext();
+  const { state } = useAppContext();
 
   const totalItems = useMemo(() => {
-    const noOfItems = cartItems.length;
+    const noOfItems = state.cartItems.length;
     return noOfItems;
-  }, [cartItems]);
+  }, [state.cartItems]);
 
   return (
     <>
       <nav className="h-20 w-full">
         <div className="flex">
           <div className="flex w-1/3 h-20 gap-x-6 justify-center items-center">
-            {categories.map((element, index) => (
+            {state.categories.map((element, index) => (
               <NavLink
-              index={index}
+                index={index}
                 className={"text-md font-light"}
                 toLink={`/category/${element.name}`}
               >
@@ -37,13 +37,15 @@ function NavBar() {
             </Link>
           </div>
           <div className="flex w-1/3 h-20 gap-x-6 justify-center items-center">
-            {navBarList.map(
-              (element, index) => (
-                <NavLink index={index} className={"text-md font-light"} toLink={element.name}>
-                  {element.name}
-                </NavLink>
-              )
-            )}
+            {navBarList.map((element, index) => (
+              <NavLink
+                index={index}
+                className={"text-md font-light"}
+                toLink={element.name}
+              >
+                {element.name}
+              </NavLink>
+            ))}
             <div className="flex gap-x-6 justify-center items-center relative inline-block">
               <div>
                 <Link to={HOMEPATH}>
